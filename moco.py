@@ -73,7 +73,8 @@ class AdaMoCo(nn.Module):
         #    #Starting of training
         #    self.mem_labels[idxs, :] = pseudo_labels.unsqueeze(1).repeat_interleave(self.memory_length, dim=1)
             
-        self.mem_ptr = (self.mem_ptr + 1) % self.memory_length
+        #self.mem_ptr = (self.mem_ptr + 1) % self.memory_length
+        self.mem_ptr = epoch % self.memory_length
 
         """self._momentum_update_key_encoder()
         features, pseudolabels = self.momentum_model(imgs)

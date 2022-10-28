@@ -334,6 +334,8 @@ def train(epoch, net, moco_model, optimizer, trainloader, banks):
     acc = 0
     acc_refined_out = 0
     acc_y_noisy = 0
+    f_neg_incl = 0
+    f_pos_excl = 0
     perc_f_neg = 0
     perc_f_pos = 0
 
@@ -371,15 +373,15 @@ def train(epoch, net, moco_model, optimizer, trainloader, banks):
         else:
             loss_ctr = 0
         
-        # update key features and corresponding pseudo labels
-        moco_model.update_memory(epoch, idxs, keys, pseudo_labels_w, y)
-
         #FOR ANALYSIS
-        false_negative = (moco_model.real_labels[idxs].unsqueeze(1) == moco_model.real_labels[moco_model.idxs].unsqueeze(0)) & (moco_model.mem_labels[idxs,moco_model.mem_ptr].unsqueeze(1) != moco_model.mem_labels[moco_model.idxs,moco_model.mem_ptr].unsqueeze(0))
+        false_negative = (moco_model.real_labels[idxs].unsqueeze(1) == moco_model.real_labels[moco_model.idxs].unsqueeze(0)) & (pseudo_labels_w.unsqueeze(1) != moco_model.mem_labels[moco_model.idxs,moco_model.mem_ptr].unsqueeze(0))
         false_positive = (moco_model.real_labels[idxs].unsqueeze(1) != moco_model.real_labels[moco_model.idxs].unsqueeze(0)) & (moco_model.mem_labels[idxs,moco_model.mem_ptr].unsqueeze(1) == moco_model.mem_labels[moco_model.idxs,moco_model.mem_ptr].unsqueeze(0))
 
         wrongly_included_false_negative = false_negative & torch.all(moco_model.mem_labels[idxs].unsqueeze(1) != moco_model.mem_labels[moco_model.idxs].unsqueeze(0), dim=2)
-        wrongly_excluded_false_positive = false_positive & (~torch.all(moco_model.mem_labels[idxs].unsqueeze(1) != moco_model.mem_labels[moco_model.idxs].unsqueeze(0), dim=2))
+        wrongly_excluded_false_positive = false_positive & ~(torch.all(moco_model.mem_labels[idxs].unsqueeze(1) != moco_model.mem_labels[moco_model.idxs].unsqueeze(0), dim=2))
+        
+        # update key features and corresponding pseudo labels
+        moco_model.update_memory(epoch, idxs, keys, pseudo_labels_w, y)
 
         with torch.no_grad():
             #CE weights
@@ -424,6 +426,8 @@ def train(epoch, net, moco_model, optimizer, trainloader, banks):
         acc_y_noisy += accuracy_y_noisy
         perc_f_neg += wrongly_included_false_negative.sum()/false_negative.sum()
         perc_f_pos += wrongly_excluded_false_positive.sum()/false_positive.sum()
+        f_pos_excl += wrongly_excluded_false_positive.sum()
+        f_neg_incl += wrongly_included_false_negative.sum()
         
         if batch_idx % 100 == 0:
             print('Epoch [%3d/%3d] Iter[%3d/%3d]\t ' 
@@ -444,8 +448,10 @@ def train(epoch, net, moco_model, optimizer, trainloader, banks):
         'constrastive_loss': loss_ctr/len(trainloader), \
         'acc_y_noisy': acc_y_noisy/len(trainloader), \
         'acc_refined_out': acc_refined_out/len(trainloader), \
+        'f_neg_incl': f_neg_incl/len(trainloader), \
+        'f_pos_excl': f_pos_excl/len(trainloader), \
         'perc_f_neg': perc_f_neg/len(trainloader), \
-        'perc_f_neg': perc_f_neg/len(trainloader), \
+        'perc_f_pos': perc_f_pos/len(trainloader), \
         }, step=epoch) 
 
 @torch.no_grad()

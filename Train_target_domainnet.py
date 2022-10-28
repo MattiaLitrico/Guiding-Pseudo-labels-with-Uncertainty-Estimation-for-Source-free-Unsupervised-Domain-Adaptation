@@ -371,7 +371,7 @@ def train(epoch, net, moco_model, optimizer, trainloader, banks):
         
         
         # update key features and corresponding pseudo labels
-        moco_model.update_memory(epoch, idxs, keys, pseudo_labels_w)
+        moco_model.update_memory(epoch, idxs, keys, pseudo_labels_w,y)
 
         with torch.no_grad():
             #CE weights
