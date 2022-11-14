@@ -22,7 +22,7 @@ class AdaMoCo(nn.Module):
         self.T_moco = 0.07
 
         #queue length
-        self.K = 16384#55388
+        self.K = min(16384,dataset_length)#55388
         self.memory_length = temporal_length
 
         self.register_buffer("features", torch.randn(features_length, self.K))
