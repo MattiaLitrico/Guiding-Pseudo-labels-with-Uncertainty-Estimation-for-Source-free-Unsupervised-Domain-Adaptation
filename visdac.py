@@ -2,22 +2,10 @@ from __future__ import print_function
 from PIL import Image
 import os
 import os.path
-from os.path import join
 import numpy as np
 import sys
-import torchvision.transforms as transforms
-if sys.version_info[0] == 2:
-    import cPickle as pickle
-else:
-    import pickle
-import torch
 import torch.utils.data as data
-from utils import download_url, check_integrity, multiclass_noisify, Cutout
 import glob
-from sklearn.metrics import accuracy_score, confusion_matrix
-from sklearn.metrics import ConfusionMatrixDisplay
-import h5py
-
 
 class VISDAC(data.Dataset):
     def __init__(self, root, domain, train=True, transform=None, from_file=False):
