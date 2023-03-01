@@ -13,12 +13,12 @@ class VISDAC(data.Dataset):
         self.transform = transform
         
         if domain == 'source':
-            domain = 'train_scaled256'
+            domain = 'train'
         else:
             if self.train:
-                domain = 'validation_scaled256'
+                domain = 'validation'
             else:
-                domain = 'test_scaled256'
+                domain = 'test'
         
         if not from_file:
             data = []
