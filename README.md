@@ -15,7 +15,6 @@ A novel negative pairs exclusion strategy is proposed to identify and exclude ne
 We set the new TTA state-ofthe-art on VisDA-C and DomainNet with a performance gain of +1.8% on both benchmarks and on PACS with +12.3% in the single-source setting and +6.6% in multi-target adaptation. 
 Additional analyses demonstrate that the proposed approach is robust to the noise, which results in significantly more accurate pseudo-labels compared to state-of-the-art approaches
 
-## Code
 
 ### Install dependencies
 
@@ -49,9 +48,9 @@ ${DATA_ROOT}
 │   ├── clipart_list.txt
 │   ├── painting_list.txt
 ```
-### VisDA-C
+## VisDA-C
 
-##  Training
+###  Training
 
 VISDA-C experiments are done for ```train``` to ```validation``` adaptation. 
 Before the test-time adaptation, we should have the source model. 
@@ -81,9 +80,9 @@ This will reproduce Table. 3 from the main paper:
 
 ![](images/main_paper_visdac_results.png)
 
-### DomainNet-126
+## DomainNet-126
 
-##  Training
+###  Training
 
 DomainNet-126 experiments are done for 7 domain shifts constructed from combinations of ```Real```, ```Sketch```, ```Clipart```, and ```Painting```. 
 Before the test-time adaptation, we should have the source model. 
