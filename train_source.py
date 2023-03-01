@@ -12,18 +12,19 @@ import wandb
 from sklearn.metrics import accuracy_score
 from torch.optim.lr_scheduler import *
 from utils import *
-from torchvision.models import resnet18, resnet50, resnet101
 from datasets import *
+from os.path import join
 
-parser = argparse.ArgumentParser(description='PyTorch CIFAR Training')
+parser = argparse.ArgumentParser(description='PyTorch Training')
+parser.add_argument('--data_dir', type=str, default='data')
 parser.add_argument('--batch_size', default=256, type=int, help='train batchsize') 
-parser.add_argument('--lr', '--learning_rate', default=0.02, type=float, help='initial learning rate')
+parser.add_argument('--lr', '--learning_rate', default=0.001, type=float, help='initial learning rate')
 parser.add_argument('--num_epochs', default=300, type=int)
 parser.add_argument('--seed', default=123)
 parser.add_argument('--gpuid', default=0, type=int)
 parser.add_argument('--num_class', default=10, type=int)
 parser.add_argument('--alfa', default=0.1, type=float)
-parser.add_argument('--dataset', default='cifar10', type=str)
+parser.add_argument('--dataset', default='visdac/source', type=str)
 parser.add_argument('--run_name', type=str)
 parser.add_argument('--wandb', action='store_true', help="Use wandb")
 
@@ -70,8 +71,9 @@ def train(epoch, net, optimizer, trainloader):
 
         loss.append(l.item()) 
         acc.append(accuracy)
-   
-        print('Epoch [%3d/%3d] Iter[%3d/%3d]\t ' 
+
+        if batch_idx % 100 == 0:
+            print('Epoch [%3d/%3d] Iter[%3d/%3d]\t ' 
                 %(epoch, args.num_epochs, batch_idx+1, len(trainloader)))
 
     loss = np.mean( np.array(loss) )
@@ -130,23 +132,23 @@ def create_model(arch, args):
 arch = 'resnet18'
 
 if args.dataset.split('/')[0] == 'pacs':
-    train_dataset = dataset(dataset=args.dataset, root='./data/PACS',
+    train_dataset = dataset(dataset=args.dataset, root=join(args.data_dir, 'PACS'),
                           mode='train',
                           transform=transforms.Compose([transforms.Resize(256), transforms.RandomCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(), transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
                           )
 
-    test_dataset = dataset(dataset=args.dataset, root='./data/PACS',
+    test_dataset = dataset(dataset=args.dataset, root=join(args.data_dir, 'PACS'),
                          mode='test',
                          transform=transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
                          )
 
 elif args.dataset.split('/')[0] == 'visdac':
-    train_dataset = dataset(dataset=args.dataset, root='./data/VisdaC',
+    train_dataset = dataset(dataset=args.dataset, root=join(args.data_dir, 'VISDA-C'),
                           mode='train',
                           transform=transforms.Compose([transforms.Resize(256), transforms.RandomCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(), transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
                           )
 
-    test_dataset = dataset(dataset=args.dataset, root='./data/VisdaC',
+    test_dataset = dataset(dataset=args.dataset, root=join(args.data_dir, 'VISDA-C'),
                          mode='test',
                          transform=transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
                          )
@@ -154,12 +156,12 @@ elif args.dataset.split('/')[0] == 'visdac':
     arch = 'resnet101'
 
 elif args.dataset.split('/')[0] == 'domainnet':
-    train_dataset = dataset(dataset=args.dataset, root='./data/domainnet',
+    train_dataset = dataset(dataset=args.dataset, root=join(args.data_dir, 'domainnet-126'),
                           mode='train',
                           transform=transforms.Compose([transforms.Resize(256), transforms.RandomCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(), transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
                           )
 
-    test_dataset = dataset(dataset=args.dataset, root='./data/domainnet',
+    test_dataset = dataset(dataset=args.dataset, root=join(args.data_dir, 'domainnet-126'),
                          mode='test',
                          transform=transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
                          )

@@ -58,14 +58,14 @@ class dataset(Dataset):
                                     domain=domain,
                                     train=True,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             
             test_set = PACS(root=self.root,
                                     domain=domain,
                                     train=False,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             
             data = np.concatenate((train_set.data, test_set.data))
@@ -77,7 +77,7 @@ class dataset(Dataset):
                                     domain=domain,
                                     train=train,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             data = dataset.data
             labels = dataset.labels
@@ -115,14 +115,14 @@ class dataset(Dataset):
                                     domain=domain,
                                     train=True,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             
             test_set = VISDAC(root=self.root,
                                     domain=domain,
                                     train=False,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             
             data = np.concatenate((train_set.data, test_set.data))
@@ -134,7 +134,7 @@ class dataset(Dataset):
                                     domain=domain,
                                     train=train,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             data = dataset.data
             labels = dataset.labels
@@ -165,14 +165,14 @@ class dataset(Dataset):
                                     domain=domain,
                                     train=True,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             
             test_set = DomainNet(root=self.root,
                                     domain=domain,
                                     train=False,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             
             data = np.concatenate((train_set.data, test_set.data))
@@ -184,7 +184,7 @@ class dataset(Dataset):
                                     domain=domain,
                                     train=train,
                                     transform=self.transform,
-                                    from_file=True
+                                    from_file=False
                                     )
             data = dataset.data
             labels = dataset.labels
@@ -226,15 +226,7 @@ class dataset(Dataset):
         img, target = self.data[index], self.labels[index]
         noisy_target = self.noisy_labels[index] if self.noisy_path is not None else self.labels[index]
 
-        if self.dataset in ['mnist', 'mnistm'] and self.mode != 'all':
-            img = Image.fromarray(img.numpy())
-        elif self.dataset.split('/')[0] in ['pacs', 'visdac', 'domainnet']:
-            img = Image.fromarray(img)
-        else:
-            img = Image.open(img)
-
-        if self.dataset in ['mnist', 'usps']:
-            img = transforms.Grayscale(3)(img)
+        img = Image.open(img)
 
         strong_augmented = self.strong_augmentation(img)
         strong_augmented2 = self.strong_augmentation(img)
