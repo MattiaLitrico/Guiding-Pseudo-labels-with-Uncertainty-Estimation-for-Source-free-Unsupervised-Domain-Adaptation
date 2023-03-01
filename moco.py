@@ -1,7 +1,6 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
-import pdb
 
 class AdaMoCo(nn.Module):
     def __init__(self, src_model, momentum_model, features_length, num_classes, dataset_length, temporal_length):
@@ -22,7 +21,7 @@ class AdaMoCo(nn.Module):
         self.T_moco = 0.07
 
         #queue length
-        self.K = min(16384,dataset_length)#55388
+        self.K = min(16384, dataset_length)
         self.memory_length = temporal_length
 
         self.register_buffer("features", torch.randn(features_length, self.K))
@@ -67,22 +66,9 @@ class AdaMoCo(nn.Module):
         self.real_labels[idxs_replace] = real_label
         self.queue_ptr = end % self.K
 
-        #if epoch > 0:
         self.mem_labels[idxs, self.mem_ptr] = pseudo_labels
-        #else:
-        #    #Starting of training
-        #    self.mem_labels[idxs, :] = pseudo_labels.unsqueeze(1).repeat_interleave(self.memory_length, dim=1)
-            
-        #self.mem_ptr = (self.mem_ptr + 1) % self.memory_length
         self.mem_ptr = epoch % self.memory_length
 
-        """self._momentum_update_key_encoder()
-        features, pseudolabels = self.momentum_model(imgs)
-
-        self.features[idxs] = features
-        
-        self.labels[idxs] = pseudolabels
-"""
     @torch.no_grad()
     def get_memory(self):
         return self.features, self.labels

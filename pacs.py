@@ -10,7 +10,6 @@ if sys.version_info[0] == 2:
     import cPickle as pickle
 else:
     import pickle
-import torch
 import torch.utils.data as data
 import glob
 
