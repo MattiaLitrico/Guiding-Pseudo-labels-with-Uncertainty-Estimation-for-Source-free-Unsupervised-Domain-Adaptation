@@ -17,14 +17,17 @@ from os.path import join
 
 parser = argparse.ArgumentParser(description='PyTorch Training')
 parser.add_argument('--data_dir', type=str, default='data')
+parser.add_argument('--dataset', default='visdac/source', type=str)
+parser.add_argument('--num_class', default=10, type=int)
+
 parser.add_argument('--batch_size', default=256, type=int, help='train batchsize') 
 parser.add_argument('--lr', '--learning_rate', default=0.001, type=float, help='initial learning rate')
 parser.add_argument('--num_epochs', default=300, type=int)
+parser.add_argument('--alfa', default=0.1, type=float)
+
 parser.add_argument('--seed', default=123)
 parser.add_argument('--gpuid', default=0, type=int)
-parser.add_argument('--num_class', default=10, type=int)
-parser.add_argument('--alfa', default=0.1, type=float)
-parser.add_argument('--dataset', default='visdac/source', type=str)
+
 parser.add_argument('--run_name', type=str)
 parser.add_argument('--wandb', action='store_true', help="Use wandb")
 

@@ -19,26 +19,30 @@ from moco import *
 
 parser = argparse.ArgumentParser(description='PyTorch Training')
 parser.add_argument('--data_dir', type=str, default='data')
-parser.add_argument('--batch_size', default=256, type=int, help='train batchsize') 
-parser.add_argument('--lr', '--learning_rate', default=0.02, type=float, help='initial learning rate')
-parser.add_argument('--num_epochs', default=300, type=int)
-parser.add_argument('--seed', default=123)
-parser.add_argument('--gpuid', default=0, type=int)
-parser.add_argument('--num_neighbors', default=10, type=int)
-parser.add_argument('--num_class', default=10, type=int)
-parser.add_argument('--temporal_length', default=5, type=int)
 parser.add_argument('--dataset', default='visdac/target', type=str)
 parser.add_argument('--source', default='visdac_source', type=str)
 parser.add_argument('--weights', type=str)
 parser.add_argument('--noisy_path', type=str, default=None)
-parser.add_argument('--run_name', type=str)
+
+parser.add_argument('--num_neighbors', default=10, type=int)
+parser.add_argument('--num_class', default=10, type=int)
+parser.add_argument('--temporal_length', default=5, type=int)
+
+parser.add_argument('--batch_size', default=256, type=int, help='train batchsize') 
+parser.add_argument('--lr', '--learning_rate', default=0.02, type=float, help='initial learning rate')
+parser.add_argument('--num_epochs', default=300, type=int)
 parser.add_argument('--temperature', default=0.07, type=float, help='softmax temperature (default: 0.07)')
-parser.add_argument('--wandb', action='store_true', help="Use wandb")
+
+parser.add_argument('--seed', default=123)
+parser.add_argument('--gpuid', default=0, type=int)
 
 parser.add_argument('--ctr', action='store_false', help="use contrastive loss")
 parser.add_argument('--label_refinement', action='store_false', help="Use label refinement")
 parser.add_argument('--neg_l', action='store_false', help="Use negative learning")
 parser.add_argument('--reweighting', action='store_false', help="Use reweighting")
+
+parser.add_argument('--run_name', type=str)
+parser.add_argument('--wandb', action='store_true', help="Use wandb")
 
 args = parser.parse_args()
 
