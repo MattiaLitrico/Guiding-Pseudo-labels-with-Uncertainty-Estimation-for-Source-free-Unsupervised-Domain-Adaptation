@@ -16,12 +16,6 @@ We set the new TTA state-ofthe-art on VisDA-C and DomainNet with a performance g
 Additional analyses demonstrate that the proposed approach is robust to the noise, which results in significantly more accurate pseudo-labels compared to state-of-the-art approaches
 
 
-### Install dependencies
-
-torch >= 1.0 torchvision opencv numpy scipy, all the dependencies can be easily installed by pip or conda
-
-This code was tested with python 3.6
-
 ### Data Preparation
 1. Please download the [VisDA-C](https://github.com/VisionLearningGroup/taskcv-2017-public/tree/master/classification) and [DomainNet](http://ai.bu.edu/M3SDA/) dataset, and put it under ```${DATA_ROOT}```. 
 By default ```${DATA_ROOT}``` is set to ```data```.
