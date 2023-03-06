@@ -1,6 +1,15 @@
 # Guiding-Pseudo-labels-with-Uncertainty-Estimation-for-Test-Time-Adaptation (CVPR 2023)
 
-### This is the official implementation of the CVPR 2023 paper "Guiding Pseudo-labels with Uncertainty Estimation for Test Time Adaptation" - Mattia Litrico, Alessio Del Bue, Pietro Morerio
+This is the official implementation of the CVPR 2023 paper "**Guiding Pseudo-labels with Uncertainty Estimation for Test Time Adaptation**" - _Mattia Litrico, Alessio Del Bue, Pietro Morerio_.
+
+```
+@inproceedings{litrico_2023_CVPR,
+  title={Guiding Pseudo-labels with Uncertainty Estimation for Test Time Adaptation},
+  author={Litrico, Mattia and Del Bue, Alessio and Morerio, Pietro},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2023}
+}
+```
 
 ## Abstract
 
