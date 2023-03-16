@@ -77,7 +77,7 @@ bash train_VISDA-C_target.sh <DATA_ROOT>
 
 This will reproduce Table. 3 from the main paper:
 
-![](images/main_paper_visdac_results.png)
+![](images/visdac_results.png)
 
 ## DomainNet-126
 
@@ -112,7 +112,7 @@ bash train_domainnet-126_target.sh <SOURCE_DOMAIN> <TARGET_DOMAIN> <DATA_ROOT>
 
 This will reproduce Table. 4 from the main paper:
 
-![](images/main_paper_domainnet_results.png)
+![](images/domainnet_results.png)
 
 ### License
 
