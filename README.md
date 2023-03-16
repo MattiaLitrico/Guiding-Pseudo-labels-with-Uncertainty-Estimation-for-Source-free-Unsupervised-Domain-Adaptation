@@ -4,7 +4,7 @@ This is the official implementation of the CVPR 2023 paper "**Guiding Pseudo-lab
 
 ```
 @inproceedings{litrico_2023_CVPR,
-  title={Guiding Pseudo-labels with Uncertainty Estimation for Test Time Adaptation},
+  title={Guiding Pseudo-labels with Uncertainty Estimation for Source-free Unsupervised Domain Adaptation},
   author={Litrico, Mattia and Del Bue, Alessio and Morerio, Pietro},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2023}
@@ -15,14 +15,10 @@ This is the official implementation of the CVPR 2023 paper "**Guiding Pseudo-lab
 
 ![](images/main_fig.png)
 
-Standard Unsupervised Domain Adaptation (UDA) methods assume the availability of both source and target data during the adaptation. In this work, we investigate the TestTime Adaptation (TTA), a specific case of UDA where a model is adapted to a target domain without access to source data. 
-We propose a novel approach for the TTA setting based on a loss reweighting strategy that brings robustness against the noise that inevitably affects the pseudo-labels. 
-The classification loss is reweighted based on the reliability of the pseudo-labels that is measured by estimating their uncertainty. 
-Guided by such reweighting strategy, the pseudolabels are progressively refined by aggregating knowledge from neighbouring samples. 
-Furthermore, a self-supervised contrastive framework is leveraged as a target space regulariser to enhance such knowledge aggregation. 
-A novel negative pairs exclusion strategy is proposed to identify and exclude negative pairs made of samples sharing the same class, even in presence of some noise in the pseudo-labels. Our method outperforms previous methods on three major benchmarks by a large margin. 
-We set the new TTA state-ofthe-art on VisDA-C and DomainNet with a performance gain of +1.8% on both benchmarks and on PACS with +12.3% in the single-source setting and +6.6% in multi-target adaptation. 
-Additional analyses demonstrate that the proposed approach is robust to the noise, which results in significantly more accurate pseudo-labels compared to state-of-the-art approaches
+Standard Unsupervised Domain Adaptation (UDA) methods assume the availability of both source and target data during the adaptation. In this work, we investigate Source-free Unsupervised Domain Adaptation (SF-UDA), a specific case of UDA where a model is adapted to a target domain without access to source data. We propose a novel approach for the SF-UDA setting based on a loss reweighting strategy that brings robustness against the noise that inevitably affects the pseudo-labels.
+The classification loss is reweighted based on the reliability of the pseudo-labels that is measured by estimating their uncertainty. Guided by such reweighting strategy, the pseudo-labels are progressively refined by aggregating knowledge from neighbouring samples. 
+Furthermore, a self-supervised contrastive framework is leveraged as a target space regulariser to enhance such knowledge aggregation. A novel negative pairs exclusion strategy is proposed to identify and exclude negative pairs made of samples sharing the same class, even in presence of some noise in the pseudo-labels.
+Our method outperforms previous methods on three major benchmarks by a large margin. We set the new SF-UDA state-of-the-art on VisDA-C and DomainNet with a performance gain of +1.8\% on both benchmarks and on PACS with +12.3\% in the single-source setting and +6.6\% in\ multi-target adaptation. Additional analyses demonstrate that the proposed approach is robust to the noise, which results in significantly more accurate pseudo-labels compared to state-of-the-art approaches.
 
 
 ### Data Preparation
@@ -98,7 +94,7 @@ Now run train_domainnet-126_target.sh to execute test-time adaptation.
 # example: bash train_VISDA-C_source.sh real
 bash train_domainnet-126_source.sh <SOURCE_DOMAIN>
 
-# train TTA
+# train SF-UDA
 # example: bash train_VISDA-C_target.sh real sketch
 bash train_domainnet-126_target.sh <SOURCE_DOMAIN> <TARGET_DOMAIN>
 ```
@@ -109,7 +105,7 @@ If you want to change the default ```${DATA_ROOT}```, please use the following:
 # example: bash train_VISDA-C_source.sh real
 bash train_domainnet-126_source.sh <SOURCE_DOMAIN> <DATA_ROOT>
 
-# train TTA
+# train SF-UDA
 # example: bash train_VISDA-C_target.sh real sketch
 bash train_domainnet-126_target.sh <SOURCE_DOMAIN> <TARGET_DOMAIN> <DATA_ROOT>
 ```
