@@ -1,6 +1,6 @@
-# Guiding-Pseudo-labels-with-Uncertainty-Estimation-for-Test-Time-Adaptation (CVPR 2023)
+# Guiding-Pseudo-labels-with-Uncertainty-Estimation-for-Source-free-Unsupervised-Domain-Adaptation (CVPR 2023)
 
-This is the official implementation of the CVPR 2023 paper "**Guiding Pseudo-labels with Uncertainty Estimation for Test Time Adaptation**" - _Mattia Litrico, Alessio Del Bue, Pietro Morerio_.
+This is the official implementation of the CVPR 2023 paper "**Guiding Pseudo-labels with Uncertainty Estimation for Source-free Unsupervised Domain Adaptation**" - _Mattia Litrico, Alessio Del Bue, Pietro Morerio_.
 
 ```
 @inproceedings{litrico_2023_CVPR,
