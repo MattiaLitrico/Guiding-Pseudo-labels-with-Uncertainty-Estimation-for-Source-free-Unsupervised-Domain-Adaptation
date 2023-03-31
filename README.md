@@ -32,6 +32,7 @@ ${DATA_ROOT}
 ├── VISDA-C
 │   ├── train
 │   ├── validation
+│   ├── test
 ```
 
 2. Please download the [DomainNet](http://ai.bu.edu/M3SDA/) dataset, and put it under ```${DATA_ROOT}```. 
