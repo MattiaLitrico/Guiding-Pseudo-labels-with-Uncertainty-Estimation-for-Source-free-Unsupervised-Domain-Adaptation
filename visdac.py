@@ -72,5 +72,5 @@ class VISDAC(data.Dataset):
         return img, target, index
 
     def __len__(self):
-        return len(self.X)
+        return len(self.data)
 
