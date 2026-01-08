@@ -2,7 +2,7 @@
 
 This is the official implementation of the CVPR 2023 paper "**Guiding Pseudo-labels with Uncertainty Estimation for Source-free Unsupervised Domain Adaptation**" - _Mattia Litrico, Alessio Del Bue, Pietro Morerio_.
 
-https://arxiv.org/abs/2303.03770
+[Paper](https://arxiv.org/abs/2303.03770)
 
 ```
 @inproceedings{litrico_2023_CVPR,
@@ -14,7 +14,7 @@ https://arxiv.org/abs/2303.03770
 ```
 ## Journal Extension - Uncertainty-guided Open-Set Source-Free Unsupervised Domain Adaptation with Target-private Class Segregation (IJCV)
 
-[https://arxiv.org/abs/2303.03770](https://arxiv.org/pdf/2404.10574?)
+[Paper](https://arxiv.org/pdf/2404.10574?)
 
 ```
 @article{litrico_2025_IJCV,
