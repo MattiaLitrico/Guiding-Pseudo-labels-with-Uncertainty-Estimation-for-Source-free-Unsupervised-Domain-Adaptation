@@ -12,6 +12,18 @@ https://arxiv.org/abs/2303.03770
   year={2023}
 }
 ```
+## Journal Extension - Uncertainty-guided Open-Set Source-Free Unsupervised Domain Adaptation with Target-private Class Segregation (IJCV)
+
+[https://arxiv.org/abs/2303.03770](https://arxiv.org/pdf/2404.10574?)
+
+```
+@article{litrico_2025_IJCV,
+  title={Uncertainty-guided Open-Set Source-Free Unsupervised Domain Adaptation with Target-private Class Segregation},
+  author={Litrico, Mattia and Talon, Davide and Battiato, Sebastiano and Del Bue, Alessio and Giuffrida, Valerio and Morerio, Pietro},
+  journal= {International Journal of Computer Vision},
+  year={202r}
+}
+```
 
 ## Abstract
 
